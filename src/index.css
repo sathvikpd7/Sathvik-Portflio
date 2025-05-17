@@ -1,0 +1,227 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --neon-blue: #00f2fe;
+  --neon-green: #00ff87;
+  --neon-purple: #b537f2;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  @apply bg-white text-gray-900 dark:bg-dark-100 dark:text-white transition-colors duration-300;
+}
+
+@layer utilities {
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-neon-blue via-neon-purple to-neon-green animate-gradient-x;
+  }
+  
+  /* Grid background patterns */
+  .bg-grid-light {
+    background-size: 50px 50px;
+    background-image: 
+      linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  }
+  
+  .bg-grid-dark {
+    background-size: 50px 50px;
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  }
+  
+  /* Neon glow effects */
+  .neon-glow {
+    box-shadow: 0 0 5px var(--neon-blue),
+                0 0 10px var(--neon-blue),
+                0 0 20px var(--neon-blue);
+  }
+  
+  .neon-text {
+    text-shadow: 0 0 5px var(--neon-blue),
+                0 0 10px var(--neon-blue),
+                0 0 15px var(--neon-blue);
+  }
+  
+  .neon-border {
+    border: 1px solid rgba(0, 242, 254, 0.5);
+    box-shadow: 0 0 5px var(--neon-blue),
+                inset 0 0 5px var(--neon-blue);
+  }
+  
+  /* Noise texture overlay */
+  .noise-overlay {
+    position: relative;
+  }
+  
+  .noise-overlay::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.1'/%3E%3C/svg%3E");
+    opacity: 0.15;
+    pointer-events: none;
+  }
+}
+
+.nav-link {
+  @apply relative px-4 py-2 text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors duration-300;
+}
+
+.nav-link::after {
+  content: '';
+  @apply absolute left-0 bottom-0 w-0 h-0.5 bg-blue-600 dark:bg-neon-blue transition-all duration-300;
+}
+
+.nav-link:hover::after {
+  @apply w-full;
+}
+
+.section-heading {
+  @apply text-4xl md:text-5xl font-bold mb-8 text-gray-900;
+}
+
+.dark .section-heading {
+  @apply gradient-text;
+}
+
+.card {
+  @apply bg-white dark:bg-dark-200 shadow-md dark:shadow-none rounded-lg p-6 transition-transform duration-300 hover:transform hover:scale-105;
+}
+
+.button {
+  @apply px-6 py-3 rounded-lg font-medium transition-all duration-300;
+}
+
+.button-primary {
+  @apply button bg-blue-600 text-white hover:bg-blue-700 dark:bg-neon-blue dark:text-dark-100 dark:hover:bg-opacity-90;
+}
+
+.button-outline {
+  @apply button border-2 border-blue-600 text-blue-600 hover:bg-blue-50 dark:border-neon-blue dark:text-neon-blue dark:hover:bg-neon-blue/10;
+}
+
+.input {
+  @apply w-full px-4 py-2 bg-gray-100 dark:bg-dark-300 rounded-lg border-2 border-gray-200 dark:border-dark-400 focus:border-blue-600 dark:focus:border-neon-blue focus:outline-none transition-colors duration-300;
+}
+
+/* Glow effects */
+.glow-effect {
+  position: relative;
+}
+
+.glow-effect::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background: linear-gradient(45deg, #00f2fe, #4facfe, #00f2fe);
+  border-radius: inherit;
+  z-index: -1;
+  filter: blur(15px);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.dark .glow-effect::before {
+  opacity: 0.5;
+}
+
+.dark .glow-effect:hover::before {
+  opacity: 0.8;
+}
+
+.animated-gradient-bg {
+  background: linear-gradient(-45deg, #0A1128, #243B55, #001F3F, #103783);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Floating animation */
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.float-delay-1 {
+  animation-delay: 1s;
+}
+
+.float-delay-2 {
+  animation-delay: 2s;
+}
+
+.hover-lift {
+  transition: transform 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.text-glow {
+  text-shadow: 0 0 10px rgba(0, 242, 254, 0.8);
+}
+
+/* Additional styles for buttons and components */
+.button-primary, .button-outline {
+  transition: all 0.3s ease;
+}
+
+.dark .button-primary:hover, .dark .button-outline:hover {
+  box-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
+}
+
+/* Add this after the other neon effects */
+.dark-navbar-glow {
+  box-shadow: 0 4px 20px -2px rgba(0, 242, 254, 0.2);
+  animation: navbar-pulse 4s infinite;
+}
+
+@keyframes navbar-pulse {
+  0%, 100% {
+    box-shadow: 0 4px 20px -2px rgba(0, 242, 254, 0.2);
+  }
+  50% {
+    box-shadow: 0 4px 30px 0px rgba(0, 242, 254, 0.3);
+  }
+}
